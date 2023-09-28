@@ -6,7 +6,7 @@ public class EnemyStateMachine : MonoBehaviour
     
     // Enemy settings.
     public float moveSpeed = 3.0f;
-    private Transform _playerTransform;
+    public Transform playerTransform;
 
     public enum EnemyStates
     {
@@ -53,7 +53,7 @@ public class EnemyStateMachine : MonoBehaviour
     void UpdateChaseState()
     {
         // Calculate the direction from the enemy to the player
-        Vector3 moveDirection = (_playerTransform.position - transform.position).normalized;
+        Vector3 moveDirection = (playerTransform.position - transform.position).normalized;
 
         // Use MoveTowards to move the enemy towards the player
         Vector3 targetPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;

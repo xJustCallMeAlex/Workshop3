@@ -1,13 +1,18 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
     public EnemyStateMachine stateMachine;
+    public Transform player;
+    public float detectionRange;
+    private bool state;
     
     // Start is called before the first frame update
     void Start()
     {
         stateMachine = GetComponent<EnemyStateMachine>();
+
     }
 
     // Update is called once per frame
@@ -24,9 +29,36 @@ public class EnemyController : MonoBehaviour
     }
     bool PlayerDetected()
     {
-        // Implement logic to check if the player is detected
-        // (e.g., use raycasting, triggers, etc.)
-        return true; // Replace with your detection logic
+        Vector3 distanceToPlayer = player.position - transform.position;
+
+        if (state)
+        {
+            if (distanceToPlayer.magnitude < detectionRange + 5)
+            {
+                state = true;
+                return true;
+            }
+            else
+            {
+                state = false;
+                return false;
+            }
+        }
+        else
+        {
+            if (distanceToPlayer.magnitude < detectionRange)
+            {
+                state = true;
+                return true;
+            }
+            else
+            {
+                state = false;
+                return false;
+            }
+        }
+        
+        
     }
 }
 
