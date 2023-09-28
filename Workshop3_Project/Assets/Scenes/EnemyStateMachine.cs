@@ -59,5 +59,8 @@ public class EnemyStateMachine : MonoBehaviour
         Vector3 targetPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed
             * Time.deltaTime);
+        
+        // Set the rotation to look at the player
+        transform.rotation = Quaternion.LookRotation(moveDirection);
     }
 }
